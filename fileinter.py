@@ -2,6 +2,7 @@ import os
 
 code = ""
 varlist = []
+functionlist = []
 
 def var(code, varlist, funclist, codelist):
     varlist.append(code[4:])
@@ -27,7 +28,21 @@ def get(code, varlist, funclist, codelist):
     varlist.append(input(code[3:]))
     print(f"declared var{len(varlist)-1}: {varlist[len(varlist)-1]}")
 
-#def func(code, varlist, funclist, codelist):
+def interfunc(codelist, funclist, varlist, functionlist, functionlistcall):
+    for line in len(functionlist[functionlistcall]):
+        count += 1
+        code = line.format(count, line)
+        code =  code[0:-1]
+
+        interprete(code, codelist, funclist, varlist)
+
+# this function doesnt work
+def func(varlist, funclist, codelist):
+    if type(int(code[5:code.find(";")])) == int:
+        print("intfunc no works")
+        interfunc(codelist, funclist, varlist, functionlist, int(code[5:code.find(";")])) 
+    else:
+        functionlist.append([code[5:].split("°")])
 
 def when(code, varlist, funclist, codelist):
     semicolon = code.find(";")
@@ -38,18 +53,18 @@ def when(code, varlist, funclist, codelist):
         varlist[int(code[9:10])] = str(int(varlist[int(code[9:10])]) + 1)
         print(f"repeated {varlist[int(code[9:10])]}x")
         interprete(code, codelist, funclist, varlist)
-= code[10:semicolon]:
-        scode = code[(semicolon+1):len(code)]
-        interprete(scode, codelist, fun
+
 def whennot(code, varlist, funclist, codelist):
     semicolon = code.find(";")
-    if varlist[int(code[8:9])], clist, varlist)
+    if varlist[int(code[8:9])] != code[10:semicolon]:
+        scode = code[(semicolon+1):len(code)]
+        interprete(scode, codelist, funclist, varlist)
 
 def comment(code, varlist, funclist, codelist):
     pass
 
-codelist = ["var", "out", "stop", "free", "when", "add", "/", "in", "not"]
-funclist = [var, out, stop, free, when, add, comment, get, whennot]
+codelist = ["var", "out", "stop", "free", "when", "add", "/", "in", "not", "func"]
+funclist = [var, out, stop, free, when, add, comment, get, whennot, func]
 
 filename = input("Filename:")
 with open(filename,"r") as readfile:
